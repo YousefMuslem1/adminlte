@@ -129,7 +129,7 @@
                 $('#addNew').modal('hide');
                 Toast.fire({
                     icon: 'success',
-                    title: 'Signed in successfully'
+                    title: 'User Added Successfully'
                 })
                 this.$Progress.finish();
             }
@@ -141,6 +141,7 @@
         },
         created() {
             this.loadUsers();
+            setInterval(this.loadUsers, 3000);
         }
 
     }
