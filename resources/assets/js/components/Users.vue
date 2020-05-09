@@ -21,13 +21,15 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Type</th>
+                                    <th>Registerd At</th>
                                     <th>Modify</th>
                                 </tr>
-                                <tr>
-                                    <td>183</td>
-                                    <td>John Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="label label-success">Approved</span></td>
+                                <tr v-for="user in users" :key="user.id">
+                                    <td>{{user.id}}</td>
+                                    <td>{{user.name}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td><span>{{user.type}}</span></td>
+                                    <td>{{user.created_at}}</td>
                                     <td>
                                         <a href="#" class=""> <i class="fa fa-edit blue"></i></a> /
                                         <a href="#" class=""> <i class="fa fa-trash red"></i></a>
@@ -91,7 +93,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Create</button>
+                                <button type="submit" class="btn btn-primary">Create</button>
                             </div>
                         </form>
                     </div>
@@ -106,6 +108,7 @@
         name: "Users",
         data() {
             return {
+                users : {},
               form: new Form({
                   name : '',
                   password: '',
@@ -117,10 +120,17 @@
             };
         },
         methods: {
+            loadUsers() {
+                axios.get('api/users').then(({ data }) => (this.users = data.data));
+            },
             createUser() {
-                this.form.post('api/user');
+                this.form.post('api/users');
             }
+        },
+        created() {
+            this.loadUsers();
         }
+
     }
 </script>
 
