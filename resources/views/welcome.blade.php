@@ -13,6 +13,6 @@
         <!-- Styles -->
     </head>
     <body>
-    <a href="/home">home</a>
+    <a href="/home">Home</a>
     </body>
 </html>
