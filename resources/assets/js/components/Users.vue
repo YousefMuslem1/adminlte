@@ -125,12 +125,16 @@
             },
             createUser() {
                 this.$Progress.start();
+
                 this.form.post('api/users');
+                Fire.$emit('AfterCreated');
                 $('#addNew').modal('hide');
+
                 Toast.fire({
                     icon: 'success',
                     title: 'User Added Successfully'
                 })
+
                 this.$Progress.finish();
             }
         },
@@ -140,8 +144,12 @@
             }
         },
         created() {
+            console.log('created');
+            this.$Progress.start();
             this.loadUsers();
-            setInterval(this.loadUsers, 3000);
+            Fire.$on('AfterCreated', this.loadUsers);
+            this.$Progress.finish();
+
         }
 
     }

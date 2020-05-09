@@ -9,6 +9,7 @@ import VueProgressBar from 'vue-progressbar';
 import Swal from 'sweetalert2';
 import {Form, AlertError, HasError} from "vform";
 
+
 window.Swal = Swal;
 window.Form = Form;
 Vue.component(HasError.name, HasError);
@@ -30,6 +31,7 @@ const Toast = Swal.mixin({
     }
 })
 window.Toast = Toast;
+window.Fire = new Vue();
 
 Vue.use(VueProgressBar, {
     color: 'rgb(143, 255, 199)',

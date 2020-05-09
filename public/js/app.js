@@ -34998,6 +34998,7 @@ var Toast = __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default.a.mixin({
     }
 });
 window.Toast = Toast;
+window.Fire = new Vue();
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_2_vue_progressbar___default.a, {
     color: 'rgb(143, 255, 199)',
@@ -73260,7 +73261,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -73404,12 +73405,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         createUser: function createUser() {
             this.$Progress.start();
+
             this.form.post('api/users');
+            Fire.$emit('AfterCreated');
             $('#addNew').modal('hide');
+
             Toast.fire({
                 icon: 'success',
                 title: 'User Added Successfully'
             });
+
             this.$Progress.finish();
         }
     },
@@ -73419,8 +73424,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
+        console.log('created');
+        this.$Progress.start();
         this.loadUsers();
-        setInterval(this.loadUsers, 3000);
+        Fire.$on('AfterCreated', this.loadUsers);
+        this.$Progress.finish();
     }
 });
 
