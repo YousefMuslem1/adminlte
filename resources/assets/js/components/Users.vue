@@ -28,8 +28,8 @@
                                     <td>{{user.id}}</td>
                                     <td>{{user.name}}</td>
                                     <td>{{user.email}}</td>
-                                    <td><span>{{user.type}}</span></td>
-                                    <td>{{user.created_at}}</td>
+                                    <td><span>{{user.type | capitalize}}</span></td>
+                                    <td>{{user.created_at | dataFilter}}</td>
                                     <td>
                                         <a href="#" class=""> <i class="fa fa-edit blue"></i></a> /
                                         <a href="#" class=""> <i class="fa fa-trash red"></i></a>
@@ -125,6 +125,11 @@
             },
             createUser() {
                 this.form.post('api/users');
+            }
+        },
+        filters: {
+            capitalize(value) {
+                return value.charAt(0).toUpperCase() + value.slice(1);
             }
         },
         created() {
