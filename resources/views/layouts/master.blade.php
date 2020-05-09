@@ -120,10 +120,11 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-
         <!-- Main content -->
         <div class="content">
             <router-view></router-view>
+            <!-- set progressbar -->
+            <vue-progress-bar></vue-progress-bar>
             <div class="container-fluid">
                 <div class="row">
                 </div>
