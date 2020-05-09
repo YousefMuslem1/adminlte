@@ -73261,7 +73261,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -73404,15 +73404,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         createUser: function createUser() {
+            var _this2 = this;
+
             this.$Progress.start();
 
-            this.form.post('api/users');
-            Fire.$emit('AfterCreated');
-            $('#addNew').modal('hide');
+            this.form.post('api/users').then(function () {
+                Fire.$emit('AfterCreated');
+                $('#addNew').modal('hide');
 
-            Toast.fire({
-                icon: 'success',
-                title: 'User Added Successfully'
+                Toast.fire({
+                    icon: 'success',
+                    title: 'User Added Successfully'
+                });
+            }).catch(function () {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Somthing was wrong'
+                });
+                _this2.$Progress.fail();
             });
 
             this.$Progress.finish();

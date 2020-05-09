@@ -126,14 +126,24 @@
             createUser() {
                 this.$Progress.start();
 
-                this.form.post('api/users');
-                Fire.$emit('AfterCreated');
-                $('#addNew').modal('hide');
+                this.form.post('api/users')
+                    .then(()=>{
+                    Fire.$emit('AfterCreated');
+                    $('#addNew').modal('hide');
 
-                Toast.fire({
-                    icon: 'success',
-                    title: 'User Added Successfully'
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'User Added Successfully'
+                    })
                 })
+                    .catch(()=> {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Somthing was wrong'
+                        })
+                        this.$Progress.fail()
+                    });
+
 
                 this.$Progress.finish();
             }
