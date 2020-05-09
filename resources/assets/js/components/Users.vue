@@ -52,13 +52,48 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Create</button>
-                        </div>
+                        <form @submit.prevent="createUser">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <input v-model="form.name" type="text" name="name"
+                                           placeholder="Enter User Name"
+                                           class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                                    <has-error :form="form" field="name"></has-error>
+                                </div>
+                                <div class="form-group">
+                                    <input v-model="form.email" type="text" name="email"
+                                           placeholder="Enter User Email"
+                                           class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
+                                    <has-error :form="form" field="email"></has-error>
+                                </div>
+                                <div class="form-group">
+                                    <textarea v-model="form.bio" type="text" name="bio"
+                                           placeholder="Enter User Bio"
+                                              class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
+                                    <has-error :form="form" field="bio"></has-error>
+                                </div>
+                                <div class="form-group">
+                                    <select v-model="form.type" name="type"
+                                            class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
+                                        <option value="">Select User Role</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="user">Standard</option>
+                                        <option value="author">Author</option>
+                                    </select>
+                                    <has-error :form="form" field="type"></has-error>
+                                </div>
+                                <div class="form-group">
+                                    <input v-model="form.password" type="password" name="password"
+                                           placeholder="Enter User password"
+                                           class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
+                                    <has-error :form="form" field="password"></has-error>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Create</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -66,8 +101,26 @@
 </template>
 
 <script>
+
     export default {
-        name: "Users"
+        name: "Users",
+        data() {
+            return {
+              form: new Form({
+                  name : '',
+                  password: '',
+                  email: '',
+                  type: '',
+                  bio: '',
+                  photo: ''
+              })
+            };
+        },
+        methods: {
+            createUser() {
+                this.form.post('api/user');
+            }
+        }
     }
 </script>
 
