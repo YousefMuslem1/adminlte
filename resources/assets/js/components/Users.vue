@@ -126,6 +126,11 @@
             createUser() {
                 this.$Progress.start();
                 this.form.post('api/users');
+                $('#addNew').modal('hide');
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                })
                 this.$Progress.finish();
             }
         },
